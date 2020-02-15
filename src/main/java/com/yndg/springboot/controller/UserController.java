@@ -1,0 +1,29 @@
+package com.yndg.springboot.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.yndg.springboot.model.User;
+import com.yndg.springboot.service.UserService;
+
+@Controller
+public class UserController {
+
+	@Autowired
+	UserService us;	
+	
+	@GetMapping("/")
+	public String Home(Model model) {
+		
+		List<User> users = us.findAll();
+		
+		model.addAttribute("users", users);
+		
+		return "home";
+	}
+	
+}
